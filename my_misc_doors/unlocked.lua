@@ -23,7 +23,7 @@ end
 
 -- Crafts
 
-minetest.register_craft({
+core.register_craft({
 	output = "my_misc_doors:door1 1",
 	recipe = {
 		{"my_door_wood:wood_white", "my_door_wood:wood_white", ""},
@@ -32,7 +32,7 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = "my_misc_doors:door2 1",
 	recipe = {
 		{"my_door_wood:wood_grey", "my_door_wood:wood_grey", ""},
@@ -40,7 +40,7 @@ minetest.register_craft({
 		{"my_door_wood:wood_grey", "my_door_wood:wood_grey", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_misc_doors:door3 1",
 	recipe = {
 		{"default:stone", "default:stone", ""},
@@ -48,7 +48,7 @@ minetest.register_craft({
 		{"default:stone", "default:stone", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_misc_doors:door4 1",
 	recipe = {
 		{"default:cobble", "default:cobble", ""},
@@ -56,7 +56,7 @@ minetest.register_craft({
 		{"default:cobble", "default:cobble", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_misc_doors:door5 1",
 	recipe = {
 		{"my_door_wood:wood_white", "wool:red", ""},
@@ -64,7 +64,7 @@ minetest.register_craft({
 		{"my_door_wood:wood_white", "wool:red", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_misc_doors:door6 1",
 	recipe = {
 		{"default:steel_ingot", "default:iron_lump", ""},

@@ -10,8 +10,8 @@ local door_wood = { -- color, desc, image
 local function my_door_wood_block_stairs(nodename, def)
 	local mod = string.match(nodename, "(.+):")
 	local name = string.match(nodename, ":(.+)")
-	minetest.register_node(nodename, def)
-	if minetest.get_modpath("moreblocks") then
+	core.register_node(nodename, def)
+	if core.get_modpath("moreblocks") then
 		stairsplus:register_all(
 			mod,
 			name,
@@ -23,7 +23,7 @@ local function my_door_wood_block_stairs(nodename, def)
 				sounds = def.sounds,
 			}
 		)
-	elseif minetest.get_modpath("stairs") then
+	elseif core.get_modpath("stairs") then
 		stairs.register_stair_and_slab(name,nodename,
 			def.groups,
 			def.tiles,
@@ -45,7 +45,7 @@ local function add_door(color, desc, img)
 	})
 
 	-- Crafts
-	minetest.register_craft({
+	core.register_craft({
 		output = "my_door_wood:wood_"..color,
 		recipe = {
 			{"default:wood", "", ""},

@@ -26,7 +26,7 @@ end
 
 -- Crafts
 
-minetest.register_craft({
+core.register_craft({
 	output = "my_fancy_doors:door1_locked 1",
 	recipe = {
 		{"my_door_wood:wood_yellow", "default:glass", ""},
@@ -35,7 +35,7 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = "my_fancy_doors:door2_locked 1",
 	recipe = {
 		{"my_door_wood:wood_yellow", "default:glass", ""},
@@ -43,7 +43,7 @@ minetest.register_craft({
 		{"my_door_wood:wood_yellow", "default:glass", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_fancy_doors:door3_locked 1",
 	recipe = {
 		{"my_door_wood:wood_white", "default:glass", ""},
@@ -51,7 +51,7 @@ minetest.register_craft({
 		{"my_door_wood:wood_white", "default:glass", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_fancy_doors:door4_locked 1",
 	recipe = {
 		{"my_door_wood:wood_red", "my_door_wood:wood_dark_grey", ""},
@@ -59,7 +59,7 @@ minetest.register_craft({
 		{"my_door_wood:wood_red", "my_door_wood:wood_dark_grey", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_fancy_doors:door5_locked 1",
 	recipe = {
 		{"default:glass", "my_door_wood:wood_yellow", ""},
@@ -67,7 +67,7 @@ minetest.register_craft({
 		{"my_door_wood:wood_yellow", "my_door_wood:wood_yellow", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_fancy_doors:door6_locked 1",
 	recipe = {
 		{"default:glass", "my_door_wood:wood_red", ""},
@@ -75,7 +75,7 @@ minetest.register_craft({
 		{"my_door_wood:wood_red", "my_door_wood:wood_red", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_fancy_doors:door7_locked 1",
 	recipe = {
 		{"my_door_wood:wood_red", "default:glass", ""},
@@ -83,7 +83,7 @@ minetest.register_craft({
 		{"my_door_wood:wood_red", "my_door_wood:wood_red", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_fancy_doors:door8_locked 1",
 	recipe = {
 		{"my_door_wood:wood_red", "my_door_wood:wood_red", ""},

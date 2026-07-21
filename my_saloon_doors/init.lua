@@ -11,7 +11,7 @@ local doorcol = {
 }
 
 local function add_door(col, des, tint, craft)
-	minetest.register_node("my_saloon_doors:door1a_"..col, {
+	core.register_node("my_saloon_doors:door1a_"..col, {
 		description = des.." Saloon Door ",
 		tiles = {"mydoors_saloon_bottom.png"..tint},
 		drawtype = "nodebox",
@@ -49,40 +49,40 @@ local function add_door(col, des, tint, craft)
 				return
 			end
 
-			if not minetest.registered_nodes[minetest.get_node(pos1).name].buildable_to or
-			   not minetest.registered_nodes[minetest.get_node(pos2).name].buildable_to then
-				minetest.chat_send_player(placer:get_player_name(), "Not enough room")
+			if not core.registered_nodes[core.get_node(pos1).name].buildable_to or
+			   not core.registered_nodes[core.get_node(pos2).name].buildable_to then
+				core.chat_send_player(placer:get_player_name(), "Not enough room")
 				return
 			end
 
 			local player_name = placer:get_player_name()
-			if minetest.is_protected(pos1, player_name) then
-				minetest.record_protection_violation(pos1, player_name)
+			if core.is_protected(pos1, player_name) then
+				core.record_protection_violation(pos1, player_name)
 				return
 			end
-			if minetest.is_protected(pos2, player_name) then
-				minetest.record_protection_violation(pos2, player_name)
+			if core.is_protected(pos2, player_name) then
+				core.record_protection_violation(pos2, player_name)
 				return
 			end
 
-	        return minetest.item_place(itemstack, placer, pointed_thing)
+	        return core.item_place(itemstack, placer, pointed_thing)
 		end,
 		on_rightclick = function(pos, node, player, itemstack, pointed_thing)
-			local timer = minetest.get_node_timer(pos)
+			local timer = core.get_node_timer(pos)
 			local par1 = node.param2
-			local par2 = minetest.dir_to_facedir(player:get_look_dir())
+			local par2 = core.dir_to_facedir(player:get_look_dir())
 			if par1 + par2 == 1 or
 			   par1 + par2 == 3 or
 			   par1 + par2 == 5 then
 				par2 = par1
 			end
 			if node.name == "my_saloon_doors:door1a_"..col then
-				minetest.set_node(pos, {name="my_saloon_doors:door1b_"..col, param2=par2})
+				core.set_node(pos, {name="my_saloon_doors:door1b_"..col, param2=par2})
 				timer:start(3)
 			end
 		end,
 	})
-	minetest.register_node("my_saloon_doors:door1b_"..col, {
+	core.register_node("my_saloon_doors:door1b_"..col, {
 		tiles = {"mydoors_saloon_bottom.png^[transformFY"..tint},
 		drawtype = "nodebox",
 		paramtype = "light",
@@ -111,12 +111,12 @@ local function add_door(col, des, tint, craft)
 		},
 		on_rotate = rotate_simple,
 		on_timer = function(pos, elapsed)
-			local node = minetest.get_node(pos)
-			minetest.set_node(pos, {name="my_saloon_doors:door1a_"..col, param2=node.param2})
-			-- minetest.set_node(vector.add(pos, {x=0,y=1,z=0}),{name="my_saloon_doors:door1b_"..col,param2=node.param2})
+			local node = core.get_node(pos)
+			core.set_node(pos, {name="my_saloon_doors:door1a_"..col, param2=node.param2})
+			-- core.set_node(vector.add(pos, {x=0,y=1,z=0}),{name="my_saloon_doors:door1b_"..col,param2=node.param2})
 		end,
 	})
-	minetest.register_craft({
+	core.register_craft({
 		output = "my_saloon_doors:door1a_"..col,
 		recipe = {
 			{"", "", ""},

@@ -37,7 +37,7 @@ doors.register_door("my_hidden_doors:hidden_door_grey", {
 
 -- Crafts
 
-minetest.register_craft({
+core.register_craft({
 	output = "my_hidden_doors:hidden_doorcobble 1",
 	recipe = {
 		{"my_hidden_doors:hidden_door_grey", "default:cobble", ""},
@@ -45,7 +45,7 @@ minetest.register_craft({
 		{"", "", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_hidden_doors:hidden_doorstone 1",
 	recipe = {
 		{"my_hidden_doors:hidden_door_grey", "default:stone", ""},
@@ -53,7 +53,7 @@ minetest.register_craft({
 		{"", "", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_hidden_doors:hidden_doorwood 1",
 	recipe = {
 		{"my_hidden_doors:hidden_door_grey", "default:wood", ""},
@@ -61,7 +61,7 @@ minetest.register_craft({
 		{"", "", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_hidden_doors:hidden_doorstone_brick 1",
 	recipe = {
 		{"my_hidden_doors:hidden_door_grey", "default:stonebrick", ""},
@@ -69,7 +69,7 @@ minetest.register_craft({
 		{"", "", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_hidden_doors:hidden_doordesert_cobble 1",
 	recipe = {
 		{"my_hidden_doors:hidden_door_grey", "default:desert_cobble", ""},
@@ -77,7 +77,7 @@ minetest.register_craft({
 		{"", "", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_hidden_doors:hidden_doorfurnace 1",
 	recipe = {
 		{"my_hidden_doors:hidden_door_grey", "default:furnace", ""},
@@ -85,7 +85,7 @@ minetest.register_craft({
 		{"", "", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_hidden_doors:hidden_doorchest 1",
 	recipe = {
 		{"my_hidden_doors:hidden_door_grey", "default:chest", ""},
@@ -93,7 +93,7 @@ minetest.register_craft({
 		{"", "", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_hidden_doors:hidden_doorbookshelf 1",
 	recipe = {
 		{"my_hidden_doors:hidden_door_grey", "default:bookshelf", ""},
@@ -101,7 +101,7 @@ minetest.register_craft({
 		{"", "", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_hidden_doors:hidden_doorbrick 1",
 	recipe = {
 		{"my_hidden_doors:hidden_door_grey", "default:brick", ""},
@@ -109,7 +109,7 @@ minetest.register_craft({
 		{"", "", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_hidden_doors:hidden_door_grey 1",
 	recipe = {
 		{"my_door_wood:wood_dark_grey", "my_door_wood:wood_dark_grey", ""},

@@ -22,7 +22,7 @@ end
 
 -- Crafts
 
-minetest.register_craft({
+core.register_craft({
 	output = "my_old_doors:door1 1",
 	recipe = {
 		{"default:glass", "my_door_wood:wood_yellow", ""},
@@ -30,7 +30,7 @@ minetest.register_craft({
 		{"my_door_wood:wood_yellow", "my_door_wood:wood_yellow", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_old_doors:door2 1",
 	recipe = {
 		{"default:glass", "my_door_wood:wood_red", ""},
@@ -38,7 +38,7 @@ minetest.register_craft({
 		{"my_door_wood:wood_red", "my_door_wood:wood_red", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_old_doors:door3 1",
 	recipe = {
 		{"default:glass", "my_door_wood:wood_grey", ""},
@@ -46,7 +46,7 @@ minetest.register_craft({
 		{"my_door_wood:wood_grey", "my_door_wood:wood_grey", ""}
 	}
 })
-minetest.register_craft({
+core.register_craft({
 	output = "my_old_doors:door4 1",
 	recipe = {
 		{"my_door_wood:wood_red", "my_door_wood:wood_red", ""},

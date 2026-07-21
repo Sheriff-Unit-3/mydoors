@@ -20,7 +20,7 @@ local function add_door(num, desc, img, itm)
 	})
 
 	-- Crafts
-	minetest.register_craft({
+	core.register_craft({
 		output = "my_default_doors:door"..num.." 1",
 		recipe = {
 			{"", "", ""},

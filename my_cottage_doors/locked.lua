@@ -20,7 +20,7 @@ end
 
 -- Crafts
 
-minetest.register_craft({
+core.register_craft({
 	output = "my_cottage_doors:door1_locked 1",
 	recipe = {
 		{"my_door_wood:wood_yellow", "my_door_wood:wood_yellow", "default:steel_ingot"},
@@ -29,7 +29,7 @@ minetest.register_craft({
 	}
 })
 
-minetest.register_craft({
+core.register_craft({
 	output = "my_cottage_doors:door2_locked 1",
 	recipe = {
 		{"my_door_wood:wood_red", "my_door_wood:wood_red", ""},

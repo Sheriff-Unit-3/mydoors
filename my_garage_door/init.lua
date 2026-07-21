@@ -1,9 +1,9 @@
 local rotate_disallow = rawget(_G, "screwdriver") and screwdriver.disallow or nil
 
 local function buildable_to(pos)
-	local node = minetest.get_node(pos).name
-	if minetest.registered_nodes[node] then -- The checked node is maybe an unknown node
-		return minetest.registered_nodes[node].buildable_to
+	local node = core.get_node(pos).name
+	if core.registered_nodes[node] then -- The checked node is maybe an unknown node
+		return core.registered_nodes[node].buildable_to
 	end
 	return false
 end
@@ -19,7 +19,7 @@ local nodebox_closed = {
 	}
 }
 
-minetest.register_node("my_garage_door:garage_door", {
+core.register_node("my_garage_door:garage_door", {
 	description = "Garage Door",
 	tiles = {
 		"default_snow.png"
@@ -46,36 +46,36 @@ minetest.register_node("my_garage_door:garage_door", {
 
 		if not buildable_to(pos1) or
 		   not buildable_to(pos2) then
-			minetest.chat_send_player(placer:get_player_name(), "Not enough room")
+			core.chat_send_player(placer:get_player_name(), "Not enough room")
 			return
 		end
 
 		local player_name = placer:get_player_name()
-		if minetest.is_protected(pos1, player_name) then
-			minetest.record_protection_violation(pos1, player_name)
+		if core.is_protected(pos1, player_name) then
+			core.record_protection_violation(pos1, player_name)
 			return
 		end
-		if minetest.is_protected(pos2, player_name) then
-			minetest.record_protection_violation(pos2, player_name)
+		if core.is_protected(pos2, player_name) then
+			core.record_protection_violation(pos2, player_name)
 			return
 		end
 
-		local p2 = minetest.dir_to_facedir(placer:get_look_dir())
-		minetest.set_node(pos1, {name = "my_garage_door:garage_door",     param2 = p2})
-		minetest.set_node(pos2, {name = "my_garage_door:garage_door_top", param2 = p2})
+		local p2 = core.dir_to_facedir(placer:get_look_dir())
+		core.set_node(pos1, {name = "my_garage_door:garage_door",     param2 = p2})
+		core.set_node(pos2, {name = "my_garage_door:garage_door_top", param2 = p2})
 
-		if not (minetest.settings:get_bool("creative_mode") or minetest.check_player_privs(placer:get_player_name(), {creative = true})) then
+		if not (core.settings:get_bool("creative_mode") or core.check_player_privs(placer:get_player_name(), {creative = true})) then
 			itemstack:take_item()
 		end
 		return itemstack
 	end,
 	after_destruct = function(pos, oldnode)
-		minetest.set_node(vector.add(pos, {x=0,y=1,z=0}), {name = "air"})
+		core.set_node(vector.add(pos, {x=0,y=1,z=0}), {name = "air"})
 	end,
 
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		local p2 = node.param2
-		local dir = minetest.facedir_to_dir(p2)
+		local dir = core.facedir_to_dir(p2)
 		local above = vector.add(pos, {x=0,y=1,z=0})
 
 		local t1 = vector.add(above, dir)
@@ -87,27 +87,27 @@ minetest.register_node("my_garage_door:garage_door", {
 
 		if not buildable_to(t1) or
 		   not buildable_to(t2) then
-			minetest.chat_send_player(player:get_player_name(), "Not enough room to open")
+			core.chat_send_player(player:get_player_name(), "Not enough room to open")
 			return
 		end
 
 		local player_name = player:get_player_name()
-		if minetest.is_protected(t1, player_name) then
-			minetest.record_protection_violation(t1, player_name)
+		if core.is_protected(t1, player_name) then
+			core.record_protection_violation(t1, player_name)
 			return
 		end
-		if minetest.is_protected(t2, player_name) then
-			minetest.record_protection_violation(t2, player_name)
+		if core.is_protected(t2, player_name) then
+			core.record_protection_violation(t2, player_name)
 			return
 		end
 
-		minetest.set_node(t1, {name="my_garage_door:garage_door_open",  param2=p2})
-		minetest.set_node(t2, {name="my_garage_door:garage_door_open2", param2=p2})
-		minetest.set_node(pos,   {name="air"})
-		minetest.set_node(above, {name="air"})
+		core.set_node(t1, {name="my_garage_door:garage_door_open",  param2=p2})
+		core.set_node(t2, {name="my_garage_door:garage_door_open2", param2=p2})
+		core.set_node(pos,   {name="air"})
+		core.set_node(above, {name="air"})
 	end,
 })
-minetest.register_node("my_garage_door:garage_door_top", {
+core.register_node("my_garage_door:garage_door_top", {
 	tiles = {
 		"default_snow.png"
 	},
@@ -134,7 +134,7 @@ local nodebox_open = {
 	}
 }
 
-minetest.register_node("my_garage_door:garage_door_open", {
+core.register_node("my_garage_door:garage_door_open", {
 	tiles = {
 		"default_snow.png"
 	},
@@ -149,7 +149,7 @@ minetest.register_node("my_garage_door:garage_door_open", {
 	on_rotate = rotate_disallow,
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		local p2 = node.param2
-		local dir = minetest.facedir_to_dir((p2+2)%4)
+		local dir = core.facedir_to_dir((p2+2)%4)
 
 		local t1 = vector.add(pos, dir)
 		local t2 = vector.subtract(t1, {x=0,y=1,z=0})
@@ -160,29 +160,29 @@ minetest.register_node("my_garage_door:garage_door_open", {
 
 		if not buildable_to(t1) or
 		   not buildable_to(t2) then
-			minetest.chat_send_player(player:get_player_name(), "Not enough room to close")
+			core.chat_send_player(player:get_player_name(), "Not enough room to close")
 			return
 		end
 
 		local player_name = player:get_player_name()
-		if minetest.is_protected(t1, player_name) then
-			minetest.record_protection_violation(t1, player_name)
+		if core.is_protected(t1, player_name) then
+			core.record_protection_violation(t1, player_name)
 			return
 		end
-		if minetest.is_protected(t2, player_name) then
-			minetest.record_protection_violation(t2, player_name)
+		if core.is_protected(t2, player_name) then
+			core.record_protection_violation(t2, player_name)
 			return
 		end
 
 		local t3 = vector.subtract(pos, dir)
 
-		minetest.set_node(t1, {name="my_garage_door:garage_door_top", param2=p2})
-		minetest.set_node(t2, {name="my_garage_door:garage_door",     param2=p2})
-		minetest.set_node(pos, {name="air"})
-		minetest.set_node(t3,  {name="air"})
+		core.set_node(t1, {name="my_garage_door:garage_door_top", param2=p2})
+		core.set_node(t2, {name="my_garage_door:garage_door",     param2=p2})
+		core.set_node(pos, {name="air"})
+		core.set_node(t3,  {name="air"})
 	end,
 })
-minetest.register_node("my_garage_door:garage_door_open2", {
+core.register_node("my_garage_door:garage_door_open2", {
 	tiles = {
 		"default_snow.png"
 	},
@@ -199,8 +199,8 @@ minetest.register_node("my_garage_door:garage_door_open2", {
 })
 
 -- craft
-if minetest.get_modpath("basic_materials") then
-	minetest.register_craft({
+if core.get_modpath("basic_materials") then
+	core.register_craft({
 		output = "my_garage_door:garage_door",
 		recipe = {
 			{"basic_materials:steel_bar", "", "basic_materials:steel_bar"},
