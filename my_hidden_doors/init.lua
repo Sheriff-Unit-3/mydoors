@@ -1,119 +1,117 @@
-local hdoor_list = {   --Number , Description , default image
-	{ "cobble" , "Hidden Cobble Door", "default_cobble"},
-	{ "stone" , "Hidden Stone Door", "default_stone"},
-	{ "wood", "Hidden Wood Door", "default_wood"},
-	{ "stone_brick", "Hidden Stone Brick Door", "default_stone_brick"},
-	{ "brick", "Hidden Brick Door", "default_brick"},
-	{ "desert_cobble", "Hidden Desert Cobble Door", "default_desert_cobble"},
-	{ "furnace", "Hidden Furnace Door" , "mydoors_furnace" , "door7"},
-	{ "chest", "Hidden Chest Door" , "mydoors_chest" , "door8"},
-	{ "bookshelf", "Hidden Bookshelf Door" , "mydoors_bookshelf" , "door9"},
+local hdoor_list = { --Number , Description , default image
+	{ "cobble", "Hidden Cobble Door", "default_cobble" },
+	{ "stone", "Hidden Stone Door", "default_stone" },
+	{ "wood", "Hidden Wood Door", "default_wood" },
+	{ "stone_brick", "Hidden Stone Brick Door", "default_stone_brick" },
+	{ "brick", "Hidden Brick Door", "default_brick" },
+	{ "desert_cobble", "Hidden Desert Cobble Door", "default_desert_cobble" },
+	{ "furnace", "Hidden Furnace Door", "mydoors_furnace", "door7" },
+	{ "chest", "Hidden Chest Door", "mydoors_chest", "door8" },
+	{ "bookshelf", "Hidden Bookshelf Door", "mydoors_bookshelf", "door9" },
 }
 
 local function add_door(img, desc)
 	-- Cannot add locked doors because the tooltip defies the purpose of being a hidden door
-	doors.register_door("my_hidden_doors:hidden_door"..img, {
+	doors.register_door("my_hidden_doors:hidden_door" .. img, {
 		description = desc,
-		inventory_image = "mydoors_"..img.."_inv.png",
-		groups = {choppy=2,cracky=2,door=1},
-		tiles = {{ name = "mydoors_"..img..".png", backface_culling = true }},
+		inventory_image = "mydoors_" .. img .. "_inv.png",
+		groups = { choppy = 2, cracky = 2, door = 1 },
+		tiles = { { name = "mydoors_" .. img .. ".png", backface_culling = true } },
 		protected = false,
 	})
 end
 
-
-for _,hdoor in ipairs(hdoor_list) do
+for _, hdoor in ipairs(hdoor_list) do
 	add_door(unpack(hdoor))
 end
 
 doors.register_door("my_hidden_doors:hidden_door_grey", {
 	description = "Grey Door",
 	inventory_image = "mydoors_grey_inv.png",
-	groups = {choppy=2,cracky=2,door=1},
-	tiles = {{ name = "mydoors_grey.png", backface_culling = true }},
+	groups = { choppy = 2, cracky = 2, door = 1 },
+	tiles = { { name = "mydoors_grey.png", backface_culling = true } },
 	protected = false,
 })
-
 
 -- Crafts
 
 core.register_craft({
 	output = "my_hidden_doors:hidden_doorcobble 1",
 	recipe = {
-		{"my_hidden_doors:hidden_door_grey", "default:cobble", ""},
-		{"", "", ""},
-		{"", "", ""}
-	}
+		{ "my_hidden_doors:hidden_door_grey", "default:cobble", "" },
+		{ "", "", "" },
+		{ "", "", "" },
+	},
 })
 core.register_craft({
 	output = "my_hidden_doors:hidden_doorstone 1",
 	recipe = {
-		{"my_hidden_doors:hidden_door_grey", "default:stone", ""},
-		{"", "", ""},
-		{"", "", ""}
-	}
+		{ "my_hidden_doors:hidden_door_grey", "default:stone", "" },
+		{ "", "", "" },
+		{ "", "", "" },
+	},
 })
 core.register_craft({
 	output = "my_hidden_doors:hidden_doorwood 1",
 	recipe = {
-		{"my_hidden_doors:hidden_door_grey", "default:wood", ""},
-		{"", "", ""},
-		{"", "", ""}
-	}
+		{ "my_hidden_doors:hidden_door_grey", "default:wood", "" },
+		{ "", "", "" },
+		{ "", "", "" },
+	},
 })
 core.register_craft({
 	output = "my_hidden_doors:hidden_doorstone_brick 1",
 	recipe = {
-		{"my_hidden_doors:hidden_door_grey", "default:stonebrick", ""},
-		{"", "", ""},
-		{"", "", ""}
-	}
+		{ "my_hidden_doors:hidden_door_grey", "default:stonebrick", "" },
+		{ "", "", "" },
+		{ "", "", "" },
+	},
 })
 core.register_craft({
 	output = "my_hidden_doors:hidden_doordesert_cobble 1",
 	recipe = {
-		{"my_hidden_doors:hidden_door_grey", "default:desert_cobble", ""},
-		{"", "", ""},
-		{"", "", ""}
-	}
+		{ "my_hidden_doors:hidden_door_grey", "default:desert_cobble", "" },
+		{ "", "", "" },
+		{ "", "", "" },
+	},
 })
 core.register_craft({
 	output = "my_hidden_doors:hidden_doorfurnace 1",
 	recipe = {
-		{"my_hidden_doors:hidden_door_grey", "default:furnace", ""},
-		{"", "", ""},
-		{"", "", ""}
-	}
+		{ "my_hidden_doors:hidden_door_grey", "default:furnace", "" },
+		{ "", "", "" },
+		{ "", "", "" },
+	},
 })
 core.register_craft({
 	output = "my_hidden_doors:hidden_doorchest 1",
 	recipe = {
-		{"my_hidden_doors:hidden_door_grey", "default:chest", ""},
-		{"", "", ""},
-		{"", "", ""}
-	}
+		{ "my_hidden_doors:hidden_door_grey", "default:chest", "" },
+		{ "", "", "" },
+		{ "", "", "" },
+	},
 })
 core.register_craft({
 	output = "my_hidden_doors:hidden_doorbookshelf 1",
 	recipe = {
-		{"my_hidden_doors:hidden_door_grey", "default:bookshelf", ""},
-		{"", "", ""},
-		{"", "", ""}
-	}
+		{ "my_hidden_doors:hidden_door_grey", "default:bookshelf", "" },
+		{ "", "", "" },
+		{ "", "", "" },
+	},
 })
 core.register_craft({
 	output = "my_hidden_doors:hidden_doorbrick 1",
 	recipe = {
-		{"my_hidden_doors:hidden_door_grey", "default:brick", ""},
-		{"", "", ""},
-		{"", "", ""}
-	}
+		{ "my_hidden_doors:hidden_door_grey", "default:brick", "" },
+		{ "", "", "" },
+		{ "", "", "" },
+	},
 })
 core.register_craft({
 	output = "my_hidden_doors:hidden_door_grey 1",
 	recipe = {
-		{"my_door_wood:wood_dark_grey", "my_door_wood:wood_dark_grey", ""},
-		{"my_door_wood:wood_dark_grey", "my_door_wood:wood_dark_grey", ""},
-		{"my_door_wood:wood_dark_grey", "my_door_wood:wood_dark_grey", ""}
-	}
+		{ "my_door_wood:wood_dark_grey", "my_door_wood:wood_dark_grey", "" },
+		{ "my_door_wood:wood_dark_grey", "my_door_wood:wood_dark_grey", "" },
+		{ "my_door_wood:wood_dark_grey", "my_door_wood:wood_dark_grey", "" },
+	},
 })

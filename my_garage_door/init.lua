@@ -11,41 +11,40 @@ end
 local nodebox_closed = {
 	type = "fixed",
 	fixed = {
-		{-1.5, -0.5,  -0.125,  1.5,  0.5,       -0.0625},
-		{-1.5, -0.5,  -0.1875, 1.5, -0.3125,    -0.0625},
-		{-1.5, -0.25, -0.1875, 1.5, -0.0624999, -0.0625},
-		{-1.5,  0,    -0.1875, 1.5,  0.1875,    -0.0625},
-		{-1.5,  0.25, -0.1875, 1.5,  0.4375,    -0.0625},
-	}
+		{ -1.5, -0.5, -0.125, 1.5, 0.5, -0.0625 },
+		{ -1.5, -0.5, -0.1875, 1.5, -0.3125, -0.0625 },
+		{ -1.5, -0.25, -0.1875, 1.5, -0.0624999, -0.0625 },
+		{ -1.5, 0, -0.1875, 1.5, 0.1875, -0.0625 },
+		{ -1.5, 0.25, -0.1875, 1.5, 0.4375, -0.0625 },
+	},
 }
 
 core.register_node("my_garage_door:garage_door", {
 	description = "Garage Door",
 	tiles = {
-		"default_snow.png"
+		"default_snow.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2 = "facedir",
-	groups = {cracky=3},
+	groups = { cracky = 3 },
 	node_box = table.copy(nodebox_closed),
 	selection_box = {
 		type = "fixed",
 		fixed = {
-			{-1.5, -0.5, -0.1875, 1.5, 1.5, -0.0625},
-		}
+			{ -1.5, -0.5, -0.1875, 1.5, 1.5, -0.0625 },
+		},
 	},
 	on_rotate = rotate_disallow,
 	on_place = function(itemstack, placer, pointed_thing)
 		local pos1 = pointed_thing.above
-		local pos2 = vector.add(pos1, {x=0,y=1,z=0})
+		local pos2 = vector.add(pos1, { x = 0, y = 1, z = 0 })
 
 		if not placer or not placer:is_player() then
 			return
 		end
 
-		if not buildable_to(pos1) or
-		   not buildable_to(pos2) then
+		if not buildable_to(pos1) or not buildable_to(pos2) then
 			core.chat_send_player(placer:get_player_name(), "Not enough room")
 			return
 		end
@@ -61,22 +60,27 @@ core.register_node("my_garage_door:garage_door", {
 		end
 
 		local p2 = core.dir_to_facedir(placer:get_look_dir())
-		core.set_node(pos1, {name = "my_garage_door:garage_door",     param2 = p2})
-		core.set_node(pos2, {name = "my_garage_door:garage_door_top", param2 = p2})
+		core.set_node(pos1, { name = "my_garage_door:garage_door", param2 = p2 })
+		core.set_node(pos2, { name = "my_garage_door:garage_door_top", param2 = p2 })
 
-		if not (core.settings:get_bool("creative_mode") or core.check_player_privs(placer:get_player_name(), {creative = true})) then
+		if
+			not (
+				core.settings:get_bool("creative_mode")
+				or core.check_player_privs(placer:get_player_name(), { creative = true })
+			)
+		then
 			itemstack:take_item()
 		end
 		return itemstack
 	end,
 	after_destruct = function(pos, oldnode)
-		core.set_node(vector.add(pos, {x=0,y=1,z=0}), {name = "air"})
+		core.set_node(vector.add(pos, { x = 0, y = 1, z = 0 }), { name = "air" })
 	end,
 
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		local p2 = node.param2
 		local dir = core.facedir_to_dir(p2)
-		local above = vector.add(pos, {x=0,y=1,z=0})
+		local above = vector.add(pos, { x = 0, y = 1, z = 0 })
 
 		local t1 = vector.add(above, dir)
 		local t2 = vector.add(t1, dir)
@@ -85,8 +89,7 @@ core.register_node("my_garage_door:garage_door", {
 			return
 		end
 
-		if not buildable_to(t1) or
-		   not buildable_to(t2) then
+		if not buildable_to(t1) or not buildable_to(t2) then
 			core.chat_send_player(player:get_player_name(), "Not enough room to open")
 			return
 		end
@@ -101,65 +104,64 @@ core.register_node("my_garage_door:garage_door", {
 			return
 		end
 
-		core.set_node(t1, {name="my_garage_door:garage_door_open",  param2=p2})
-		core.set_node(t2, {name="my_garage_door:garage_door_open2", param2=p2})
-		core.set_node(pos,   {name="air"})
-		core.set_node(above, {name="air"})
+		core.set_node(t1, { name = "my_garage_door:garage_door_open", param2 = p2 })
+		core.set_node(t2, { name = "my_garage_door:garage_door_open2", param2 = p2 })
+		core.set_node(pos, { name = "air" })
+		core.set_node(above, { name = "air" })
 	end,
 })
 core.register_node("my_garage_door:garage_door_top", {
 	tiles = {
-		"default_snow.png"
+		"default_snow.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	paramtype2= "facedir",
+	paramtype2 = "facedir",
 	drop = "",
 	diggable = false,
 	pointable = false,
-	groups = {cracky=3},
+	groups = { cracky = 3 },
 	node_box = table.copy(nodebox_closed),
-	selection_box = {type = "fixed",fixed = {{0, 0, 0, 0, 0, 0},}},
+	selection_box = { type = "fixed", fixed = { { 0, 0, 0, 0, 0, 0 } } },
 	on_rotate = rotate_disallow,
 })
 
 local nodebox_open = {
 	type = "fixed",
 	fixed = {
-		{-1.5, 0.4375, -0.5,    1.5, 0.375, 0.5},
-		{-1.5, 0.375,   0.3125, 1.5, 0.5,   0.5},
-		{-1.5, 0.375,   0.0625, 1.5, 0.5,   0.25},
-		{-1.5, 0.375,  -0.1875, 1.5, 0.5,   0},
-		{-1.5, 0.375,  -0.4375, 1.5, 0.5,  -0.25},
-	}
+		{ -1.5, 0.4375, -0.5, 1.5, 0.375, 0.5 },
+		{ -1.5, 0.375, 0.3125, 1.5, 0.5, 0.5 },
+		{ -1.5, 0.375, 0.0625, 1.5, 0.5, 0.25 },
+		{ -1.5, 0.375, -0.1875, 1.5, 0.5, 0 },
+		{ -1.5, 0.375, -0.4375, 1.5, 0.5, -0.25 },
+	},
 }
 
 core.register_node("my_garage_door:garage_door_open", {
 	tiles = {
-		"default_snow.png"
+		"default_snow.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	paramtype2= "facedir",
+	paramtype2 = "facedir",
 	drop = "my_garage_door:garage_door",
 	diggable = false,
-	groups = {cracky=3},
+	groups = { cracky = 3 },
 	node_box = table.copy(nodebox_open),
-	selection_box = {type = "fixed",fixed = {{-1.5, 0.375, -0.5, 1.5, 0.5, 1.5},}},
+	selection_box = { type = "fixed", fixed = { { -1.5, 0.375, -0.5, 1.5, 0.5, 1.5 } } },
 	on_rotate = rotate_disallow,
 	on_rightclick = function(pos, node, player, itemstack, pointed_thing)
 		local p2 = node.param2
-		local dir = core.facedir_to_dir((p2+2)%4)
+		local dir = core.facedir_to_dir((p2 + 2) % 4)
 
 		local t1 = vector.add(pos, dir)
-		local t2 = vector.subtract(t1, {x=0,y=1,z=0})
+		local t2 = vector.subtract(t1, { x = 0, y = 1, z = 0 })
 
 		if not player or not player:is_player() then
 			return
 		end
 
-		if not buildable_to(t1) or
-		   not buildable_to(t2) then
+		if not buildable_to(t1) or not buildable_to(t2) then
 			core.chat_send_player(player:get_player_name(), "Not enough room to close")
 			return
 		end
@@ -176,25 +178,25 @@ core.register_node("my_garage_door:garage_door_open", {
 
 		local t3 = vector.subtract(pos, dir)
 
-		core.set_node(t1, {name="my_garage_door:garage_door_top", param2=p2})
-		core.set_node(t2, {name="my_garage_door:garage_door",     param2=p2})
-		core.set_node(pos, {name="air"})
-		core.set_node(t3,  {name="air"})
+		core.set_node(t1, { name = "my_garage_door:garage_door_top", param2 = p2 })
+		core.set_node(t2, { name = "my_garage_door:garage_door", param2 = p2 })
+		core.set_node(pos, { name = "air" })
+		core.set_node(t3, { name = "air" })
 	end,
 })
 core.register_node("my_garage_door:garage_door_open2", {
 	tiles = {
-		"default_snow.png"
+		"default_snow.png",
 	},
 	drawtype = "nodebox",
 	paramtype = "light",
-	paramtype2= "facedir",
+	paramtype2 = "facedir",
 	drop = "",
 	diggable = false,
 	pointable = false,
-	groups = {cracky=3},
+	groups = { cracky = 3 },
 	node_box = table.copy(nodebox_open),
-	selection_box = {type = "fixed",fixed = {{0, 0, 0, 0, 0, 0},}},
+	selection_box = { type = "fixed", fixed = { { 0, 0, 0, 0, 0, 0 } } },
 	on_rotate = rotate_disallow,
 })
 
@@ -203,9 +205,9 @@ if core.get_modpath("basic_materials") then
 	core.register_craft({
 		output = "my_garage_door:garage_door",
 		recipe = {
-			{"basic_materials:steel_bar", "", "basic_materials:steel_bar"},
-			{"basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet"},
-			{"basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet"}
-		}
+			{ "basic_materials:steel_bar", "", "basic_materials:steel_bar" },
+			{ "basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" },
+			{ "basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" },
+		},
 	})
 end
